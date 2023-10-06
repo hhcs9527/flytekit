@@ -24,7 +24,6 @@ from flytekit.models.types import LiteralType, StructuredDatasetType
 
 TASK_TYPE = "snowflake"
 
-
 @dataclass
 class Metadata:
     user: str
@@ -46,7 +45,7 @@ class SnowflakeAgent(AgentBase):
 
         import flytekit
 
-        pk_string = flytekit.current_context().secrets.get(TASK_TYPE, "private_key", encode_mode="rb")
+        pk_string = flytekit.current_context().secrets.get("SNOWFLAKE_PRIVATE_KEY", encode_mode="rb")
         p_key = serialization.load_pem_private_key(pk_string, password=None, backend=default_backend())
 
         pkb = p_key.private_bytes(
